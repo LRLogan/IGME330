@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Phrases</title>
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&family=Oxanium:wght@200..800&family=Playpen+Sans:wght@100..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Random Phrases: Helldivers 2 edition</h1>
+    </header>
+    
+    <main>
+        <div id="container">
+            <p class="randomPhrase-text" id="quoteDisplay">SUPER EARTH</p>
+            <button id="myButton" class="btn" >Click Me</button>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Made by - Logan Larrondo</p>
+    </footer>
+
+    <script>
+        const messages = [
+            "Join The Helldivers!",
+            "For Democracy!",
+            "Sweet Liberty!",
+            "We fight for Super Earth!",
+            "Hey look over there, a Bile Titan."
+        ];
+
+        function displayQuote() {
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            const quoteDisplay = document.getElementById("quoteDisplay");
+            quoteDisplay.textContent = messages[randomIndex];
+        }
+        window.onload = displayQuote;
+
+        document.getElementById("myButton").addEventListener("click", displayQuote);
+    </script>
+</body>
+</html>

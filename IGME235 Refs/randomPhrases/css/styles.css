@@ -1,0 +1,108 @@
+
+.oxanium-font {
+  font-family: "Oxanium", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+body, html {
+    margin: .5rem;
+    padding: 0;
+    height: 100%;
+    font-family: "Oxanium", sans-serif;
+    background-color: rgb(107, 109, 119);
+}
+
+h1 {
+    text-decoration: underline; 
+    text-decoration-color: #EEB127; 
+    text-decoration-thickness: 2px;
+    text-underline-offset: .5ex;
+}
+
+#container {
+    background-image: url('../images/hanger.png');
+    background-size: cover; /* Scales the image to cover the entire area */
+    background-position: center; 
+    background-repeat: no-repeat; 
+    color: #EEB127; 
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    text-align: center; 
+    height: 75vh; 
+}
+
+.randomPhrase-text {
+    position: absolute; 
+    top: 50%; 
+    left: 0;
+    right: 0;
+    transform: translateY(-50%); 
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+    color: #EEB127; 
+    padding: 10px; 
+    font-size: 1.5em; 
+    z-index: 1; 
+}
+
+#myButton {
+    position: absolute;
+    top: 75%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    color: #EEB127; 
+    border: none; 
+    padding: 15px 30px; 
+    font-size: 1.2em; 
+    cursor: pointer;
+    border-radius: 5px; 
+    transition: background-color 0.3s; /* Smooth background color transition */
+    z-index: 1; 
+}
+
+.btn {
+    position: relative;
+    cursor: pointer;
+    margin: 0 30px;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 1px;
+    border: none;
+    padding: 14px 32px;
+    background: #fff;
+    color: #262626;
+    font-size: 20px;
+    text-transform: uppercase;    
+  }
+  
+  .btn:before {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: -10px;
+    left: -10px;
+    border-top: 3px solid #EEB127;
+    border-left: 3px solid #EEB127;
+    transition: all 0.5s;
+  }
+  
+  .btn:after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    bottom: -10px;
+    right: -10px;
+    border-bottom: 3px solid #EEB127;
+    border-right: 3px solid #EEB127;
+    transition: all 0.5s; 
+  }
+
+  .btn:hover:before,
+  .btn:hover:after {
+    height: 100%;
+    width: 100%;
+  }
