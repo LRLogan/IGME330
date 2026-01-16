@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Class Demo 3</title>
+</head>
+<body>
+    <input type="text" placeholder="Type something here" id="nameInput">
+    <button>Say Hello</button>
+    <p id="greeting">
+        Hi there!
+    </p>
+
+    <script>
+        const btn = document.querySelector('button');
+        const greeting = document.querySelector('#greeting');
+        const nameInput = document.querySelector('#nameInput');
+
+        // Adding a listener to the button
+        btn.addEventListener('click', () => {
+            // Changing text
+            greeting.textContent = 'Hello, ' + nameInput.value + '!';
+            nameInput.value = '';
+        });
+
+    </script>
+</body>
+</html>
