@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>Click Me!</button>
+    <p id="answer"></p>
+
+    <script>
+        const button = document.querySelector('button');
+
+        button.addEventListener('click', () => {
+            const answer = document.getElementById('answer');
+            answer.textContent = sum(a, b);
+        });
+
+        function sum(a, b) {
+            const num1 = 5;
+            const num2 = 10;
+            return a + b;
+        }
+
+        function concat(str1, str2)
+        {
+            const str1 = "Hello, ";
+            const str2 = "World!";
+            return str1 + " " + str2;
+        }
+
+        function add3or4Numbers(a, b, c, d)
+        {
+            return a + b + c + d;
+        }   
+
+        function addEven()
+        {
+            
+        }
+    </script>
+</body>
+</html>
