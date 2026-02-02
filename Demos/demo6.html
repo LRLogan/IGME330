@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo 6</title>
+</head>
+<body>
+
+    <script>
+        // Demo 6: Using filter and map on arrays of objects
+        const enemies = [
+            {name: 'Goblin', hp: 5, weapon: 'Dagger'},
+            {name: 'Orc', hp: 10, weapon: 'Axe'},
+            {name: 'Troll', hp: 15, weapon: 'Club'}
+        ];
+        const weapons = ['Sword', 'Bow', 'Staff', 'Spear'];
+
+        const getLowEnemys = enemies.filter(enemy => enemy.hp <= 8);
+
+        // The one critical problem with these is that we are modifying the original array
+        // This is essentially a for each loop
+        const lvlup = enemies.map(enemy => enemy.hp += Math.random() * (1 + 6 - 1));
+
+        const newWeapon = enemies.map(enemy => enemy.weapon = weapons[Math.floor(Math.random() * weapons.length)]);
+        
+
+        // Can create a new enemy with the new data and the old using the spread operator
+        const newEnemy = 
+        {
+            ...enemies[0],
+            hp: enemies[0].hp + 10,
+        }
+        // It helps us aboid the nature of JS that is largly reference based
+
+
+
+    </script>
+</body>
+</html>
