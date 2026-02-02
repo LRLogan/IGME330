@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-	<title>Fetch - Load CSV</title>
+	<title>Fetch - Load JSON</title>
 	<style>
 	body{
 	  font-family: sans-serif;
@@ -21,7 +21,7 @@
 	
 <script>
 const loadJSONFile = () => {
-  fetch('./data/pet-names.csv')
+  fetch('./data/pet-names.json')
     .then(response => {
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
@@ -31,16 +31,25 @@ const loadJSONFile = () => {
 .then(data => {
   console.log('Success:', data);
   
-  // TODO: Add object destructuring and display code here
+  // Access the categories from the JSON data
+  const dogNames = data.categories.dogs;  
+  const catNames = data.categories.cats;
 
-  // Object destructuring (for example)
-  const someData = {
-    a: 1,
-    b: [ 2, 3, 4 ]
-  };
-  const { a, b } = someData;
-  const {b: [two, three, four]} = someData;
-  console.log(a, b, two, three, four);
+  // Convert arrays to HTML <li> elements
+  const dogHTML = `<h3>Dog Names</h3>
+      <ol>
+      ${dogNames.map(name => `<li>${name}</li>`).join('')}
+      </ol>
+  `;
+
+  const catHTML = `<h3>Cat Names</h3>
+      <ol>
+      ${catNames.map(name => `<li>${name}</li>`).join('')}
+      </ol>
+  `;
+
+  // Display the HTML on the page
+  document.querySelector('#output').innerHTML = dogHTML + catHTML;
 
   })
     .catch(error => {
@@ -49,7 +58,7 @@ const loadJSONFile = () => {
     });
 };
 
-document.querySelector('#my-button').addEventListener('click', loadCSVFile);
+document.querySelector('#my-button').addEventListener('click', loadJSONFile);
 </script>
 </body>
 </html>
