@@ -30,12 +30,29 @@ const loadCSVFile = () => {
     })
     .then(text => {
       console.log('Success:', text);
-      
-      // TODO: You implement the parsing and display code here!
-      // See step-by-step instructions below
-        const names = text.split(/[, /n]/);
 
+        // Split file into lines
+        const lines = text.trim().split('\n');
 
+        // Split each line into name arrays
+        const dogNames = lines[0].split(',');
+        const catNames = lines[1].split(',');
+
+        // Convert arrays to HTML <li> elements
+        const dogHTML = `<h3>Dog Names</h3>
+            <ol>
+            ${dogNames.map(name => `<li>${name}</li>`).join('')}
+            </ol>
+        `;
+
+        const catHTML = `<h3>Cat Names</h3>
+            <ol>
+            ${catNames.map(name => `<li>${name}</li>`).join('')}
+            </ol>
+        `;
+
+        // Display the HTML on the page
+        document.querySelector('#output').innerHTML = dogHTML + catHTML;
     })
     .catch(error => {
       console.error('Error:', error);
