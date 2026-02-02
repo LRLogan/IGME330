@@ -1,6 +1,7 @@
 {
   "categories": {
     "dogs": ["Bella","Luna","Charlie","Lucy","Cooper","Max","Bailey","Daisy","Sadie","Lola","Buddy","Molly","Stella","Tucker","Bear","Zoey","Duke","Harley","Maggie","Jax"],
-    "cats": ["Oliver","Leo","Milo","Charlie","Simba","Max","Jack","Loki","Tiger","Jasper","Ollie","Oscar","George","Buddy","Toby","Smokey","Finn","Felix","Simon","Shadow"]
+    "cats": ["Oliver","Leo","Milo","Charlie","Simba","Max","Jack","Loki","Tiger","Jasper","Ollie","Oscar","George","Buddy","Toby","Smokey","Finn","Felix","Simon","Shadow"],
+    "birds": ["Kiwi","Sunny","Buddy","Angel","Coco","Charlie","Max","Bella","Luna","Rocky","Daisy","Mango","Peanut","Sky","Blue","Chirpy","Tweety","Pippin", "Chip", "Snowball"]
   }
 }

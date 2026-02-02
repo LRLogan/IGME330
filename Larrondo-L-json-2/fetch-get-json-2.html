@@ -33,7 +33,8 @@ const loadJSONFile = () => {
   
   // Access the categories from the JSON data
   const dogNames = data.categories.dogs;  
-  const catNames = data.categories.cats;
+  const catNames = data.categories.cats;  
+  const birdNames = data.categories.birds;
 
   // Convert arrays to HTML <li> elements
   const dogHTML = `<h3>Dog Names</h3>
@@ -48,8 +49,14 @@ const loadJSONFile = () => {
       </ol>
   `;
 
+  const birdHTML = `<h3>Bird Names</h3>
+      <ol>
+      ${birdNames.map(name => `<li>${name}</li>`).join('')}
+      </ol>
+  `;
+
   // Display the HTML on the page
-  document.querySelector('#output').innerHTML = dogHTML + catHTML;
+  document.querySelector('#output').innerHTML = dogHTML + catHTML + birdHTML;
 
   })
     .catch(error => {
