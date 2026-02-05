@@ -23,6 +23,11 @@ body
     height: 50pt;
 }
 
+/* Hidden by default */
+.wide-only-btn {
+  display: none;
+}
+
 @media only screen and (min-width: 320px)
 {
     .container
@@ -123,5 +128,10 @@ body
     #output
     {
         text-align: left;
+    }
+
+    .wide-only-btn 
+    {
+        display: flex; 
     }
 }

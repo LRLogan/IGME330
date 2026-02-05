@@ -4,13 +4,20 @@ const words1 = ["Acute", "Aft", "Anti-matter", "Bipolar", "Cargo", "Command", "C
 const words2 = ["Propulsion", "Dissipation", "Sensor", "Improbability", "Buffer", "Graviton", "Replicator", "Matter", "Anti-matter", "Organic", "Power", "Silicon", "Holographic", "Transient", "Integrity", "Plasma", "Fusion", "Control", "Access", "Auto", "Destruct", "Isolinear", "Transwarp", "Energy", "Medical", "Environmental", "Coil", "Impulse", "Warp", "Phaser", "Operating", "Photon", "Deflector", "Integrity", "Control", "Bridge", "Dampening", "Display", "Beam", "Quantum", "Baseline", "Input"];
 const words3 = ["Chamber", "Interface", "Coil", "Polymer", "Biosphere", "Platform", "Thruster", "Deflector", "Replicator", "Tricorder", "Operation", "Array", "Matrix", "Grid", "Sensor", "Mode", "Panel", "Storage", "Conduit", "Pod", "Hatch", "Regulator", "Display", "Inverter", "Spectrum", "Generator", "Cloud", "Field", "Terminal", "Module", "Procedure", "System", "Diagnostic", "Device", "Beam", "Probe", "Bank", "Tie-In", "Facility", "Bay", "Indicator", "Cell"];
 
-console.log(words1[0]);
-
 function displayQuote() {
-    const randomIndex = Math.floor(Math.random() * words1.length);
     const quoteDisplay = document.getElementById("output");
-    quoteDisplay.textContent = words1[randomIndex] + " " + words2[randomIndex] + " " + words3[randomIndex];
+    const wordGroups = [words1, words2, words3];
+    let babbleLine = "";
+
+    for (let i = 0; i < wordGroups.length; i++) {
+        const randomIndex = Math.floor(Math.random() * wordGroups[i].length);
+        babbleLine += `${wordGroups[i][randomIndex]} `;
+    }
+
+    quoteDisplay.textContent = babbleLine.trim();
 }
 
 window.onload = displayQuote;
-document.getElementById("myButton").addEventListener("click", displayQuote);
+document.querySelectorAll("button.myButton").forEach(button => {
+    button.addEventListener("click", displayQuote);
+});
