@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        console.log("Hello, world!");
+
+        fetch("https://f69a-2620-8d-8000-1040-2cc0-5bf1-3a91-fd75.ngrok-free.app/listen")
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+        });
+    </script>
+</body>
+</html>
