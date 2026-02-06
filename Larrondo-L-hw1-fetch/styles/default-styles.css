@@ -15,7 +15,7 @@ body
     font-size: 200%;
 }
 
- #myButton 
+ .my-button 
 {
     font-size: 15pt;
     font-family: "Oxanium", sans-serif;
@@ -68,7 +68,7 @@ body
         background-color: aqua;
     }
 
-    #myButton 
+    .my-button 
     {
         font-size: 1.5rem;
         width: 300px;

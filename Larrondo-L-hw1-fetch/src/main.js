@@ -5,7 +5,7 @@ const words2 = ["Propulsion", "Dissipation", "Sensor", "Improbability", "Buffer"
 const words3 = ["Chamber", "Interface", "Coil", "Polymer", "Biosphere", "Platform", "Thruster", "Deflector", "Replicator", "Tricorder", "Operation", "Array", "Matrix", "Grid", "Sensor", "Mode", "Panel", "Storage", "Conduit", "Pod", "Hatch", "Regulator", "Display", "Inverter", "Spectrum", "Generator", "Cloud", "Field", "Terminal", "Module", "Procedure", "System", "Diagnostic", "Device", "Beam", "Probe", "Bank", "Tie-In", "Facility", "Bay", "Indicator", "Cell"];
 
 function displayQuote() {
-    const quoteDisplay = document.getElementById("output");
+    const quoteDisplay = document.querySelector("#output");
     const wordGroups = [words1, words2, words3];
     let babbleLine = "";
 
@@ -18,6 +18,6 @@ function displayQuote() {
 }
 
 window.onload = displayQuote;
-document.querySelectorAll("button.myButton").forEach(button => {
+document.querySelectorAll("button.my-button").forEach(button => {
     button.addEventListener("click", displayQuote);
 });
