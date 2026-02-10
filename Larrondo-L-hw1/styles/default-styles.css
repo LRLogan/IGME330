@@ -21,6 +21,7 @@ body
     font-family: "Oxanium", sans-serif;
     width: 200px;
     height: 50pt;
+    text-align: center;
 }
 
 /* Hidden by default */
@@ -132,6 +133,6 @@ body
 
     .wide-only-btn 
     {
-        display: flex; 
+        display: block; 
     }
 }
