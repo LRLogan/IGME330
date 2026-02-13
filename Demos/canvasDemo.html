@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Demo</title>
+</head>
+<body>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    
+    <script>
+        const canvas = document.querySelector('canvas');
+        const ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = 'lightblue';
+        ctx.fillRect(10, 10, 100, 100);
+        ctx.strokeStyle = 'black';
+        ctx.strokeRect(10, 10, 100, 100);
+
+        ctx.beginPath();
+        ctx.arc(300, 300, 
+                50, 
+                0, Math.PI * 2);
+        ctx.fillStyle = 'lightcoral';
+        ctx.fill();
+        ctx.closePath();
+
+
+        const drawLine = () => {
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(100, 100);
+
+            ctx.moveTo(300, 100);
+            ctx.lineTo(100, 400);
+
+            ctx.strokeStyle = 'blue';
+            ctx.lineWidth = 4;
+            ctx.stroke();
+
+            // Will cause all sub-paths to jump back to theor start
+            // To create filled in shapes
+            // A similar thing will happen with ctx.fill();
+            ctx.closePath();
+        }
+        drawLine();
+
+    </script>
+</body>
+</html>
