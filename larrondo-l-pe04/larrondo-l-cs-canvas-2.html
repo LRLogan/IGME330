@@ -6,6 +6,71 @@
     <title>Canvas 2</title>
 </head>
 <body>
+    <canvas id="canvas" width="640" height="480"></canvas>
     
+    <script>
+        const canvas = document.querySelector('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Drawing a rect with ctx.rect
+        ctx.rect(10, 10, 100, 100);
+        ctx.fillStyle = 'lightblue';
+        ctx.fill();
+        ctx.strokeStyle = 'black';
+        ctx.stroke();
+
+        // Drawing a circle with ctx.arc
+        ctx.beginPath();
+        ctx.arc(300, 300, 
+                50, 
+                0, Math.PI * 2);
+        ctx.fillStyle = 'lightcoral';
+        ctx.fill();
+        ctx.closePath();
+
+        // Helper functions
+        const drawLine = (ctx, startX, startY, endX, endY, strokeColor) => {
+            ctx.beginPath();
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(endX, endY);
+
+            ctx.strokeStyle = strokeColor;
+            ctx.lineWidth = 4;
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        const drawCircle = (ctx, x, y, radius, fillColor, borderColor, borderWidth) => {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = fillColor;
+            ctx.fill();
+            ctx.strokeStyle = borderColor;
+            ctx.lineWidth = borderWidth;
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        // Drawing a line
+        drawLine(ctx, 0, 0, 100, 100, 'blue');
+
+        // Drawing a semi circle
+        ctx.beginPath();
+        ctx.arc(300, 100, 
+                50, 
+                0, Math.PI);
+        ctx.fillStyle = 'lightgreen';
+        ctx.fill();
+        ctx.closePath();
+
+        // Adding more circles
+        drawCircle(ctx, 100, 300, 50, 'lightpink', 'purple', 3);
+        drawCircle(ctx, 400, 300, 50, 'lightyellow', 'orange', 3);
+
+        // Adding one more line 
+        drawLine(ctx, 200, 200, 400, 400, 'red');
+
+
+    </script>
 </body>
 </html>
