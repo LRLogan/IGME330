@@ -4,8 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        body{
+            font-family: sans-serif;
+        }
+	
+        button{
+            font-size:1.2em;
+        }       
+	
+        section{
+            margin:.5em 0 .5em 0;
+        }
+    </style>
 </head>
 <body>
+    <section>
+        <button id="btnPlay">Play</button>
+        <button id="btnPause">Pause</button>
+    </section>
+    <section>
+        <span>
+            <input type="checkbox" id="cbRectangles" checked>
+            <label for="cbRectangles">Rectangles</label>
+        </span>
+    </section>
+    <section>
+        <p>Click on the screen to "spraypaint" rectangles (you probably want the screensaver to be paused)</p>
+    </section>
+
     <canvas id="canvas" width="800" height="600" style="border:1px solid #000000;"></canvas>
     
     <script>
@@ -21,9 +49,25 @@
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    function canvasClicked(e){
+        let rect = e.target.getBoundingClientRect();
+        let mouseX = e.clientX - rect.x;
+        let mouseY = e.clientY - rect.y;
+        console.log(mouseX,mouseY);
+    }
+
     // Main code
+    // Vars
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
+    let paused = false;
+
+    // Added functions
+    function setupUI(){
+        document.getElementById('btnPlay').addEventListener('click', () => paused = false);
+        document.getElementById('btnPause').addEventListener('click', () => paused = true);
+        canvas.addEventListener('click', canvasClicked);
+    }
 
     function drawRandomRect() {
         const x = getRandomInt(0, canvas.width);
@@ -42,6 +86,11 @@
     }
 
     function animate() {
+        if (paused) {
+            requestAnimationFrame(animate);
+            return;
+        }
+
         // Fade old drawings slightly 
         ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -52,6 +101,22 @@
         requestAnimationFrame(animate);
     }
 
+    function drawRectangle(ctx,x,y,width,height,fillStyle="black",lineWidth=0,strokeStyle="black"){
+        ctx.lineWidth = lineWidth;
+        ctx.strokeStyle = strokeStyle;
+        ctx.fillStyle = fillStyle;
+
+        ctx.beginPath();
+        ctx.rect(x, y, width, height);
+        ctx.fill();
+        
+        if(lineWidth > 0){
+            ctx.stroke();
+        }
+    }
+
+    // Main execution
+    setupUI();
     animate();
 </script>
 
