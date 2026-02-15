@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600" style="border:1px solid #000000;"></canvas>
+    
+    <script>
+    // Starter helper functions
+    function getRandomColor(){
+        function getByte(){
+            return 55 + Math.round(Math.random() * 200);
+        }
+        return `rgba(${getByte()}, ${getByte()}, ${getByte()}, 0.8)`;
+    }
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Main code
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+
+    function drawRandomRect() {
+        const x = getRandomInt(0, canvas.width);
+        const y = getRandomInt(0, canvas.height);
+        const width = getRandomInt(20, 200);
+        const height = getRandomInt(20, 200);
+
+        ctx.lineWidth = getRandomInt(1, 10);
+        ctx.strokeStyle = getRandomColor();
+        ctx.fillStyle = getRandomColor();
+
+        ctx.beginPath();
+        ctx.rect(x, y, width, height);
+        ctx.fill();
+        ctx.stroke();
+    }
+
+    function animate() {
+        // Fade old drawings slightly 
+        ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw new random rectangle
+        drawRandomRect();
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+</script>
+
+</body>
+</html>
