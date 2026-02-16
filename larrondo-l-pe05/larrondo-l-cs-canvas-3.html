@@ -54,6 +54,20 @@
         let mouseX = e.clientX - rect.x;
         let mouseY = e.clientY - rect.y;
         console.log(mouseX,mouseY);
+
+        // Drawing the rectangles
+        for(let i = 0; i < 10; i++){
+            drawRectangle(
+                ctx,
+                mouseX + getRandomInt(-50, 50),
+                mouseY + getRandomInt(-50, 50),
+                getRandomInt(20, 100),
+                getRandomInt(20, 100),
+                getRandomColor(),
+                getRandomInt(1, 5),
+                getRandomColor()
+            );
+        }
     }
 
     // Main code
@@ -61,12 +75,16 @@
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
     let paused = false;
+    let createRectangles = true;
 
     // Added functions
     function setupUI(){
-        document.getElementById('btnPlay').addEventListener('click', () => paused = false);
-        document.getElementById('btnPause').addEventListener('click', () => paused = true);
+        document.querySelector('#btnPlay').addEventListener('click', () => paused = false);
+        document.querySelector('#btnPause').addEventListener('click', () => paused = true);
         canvas.addEventListener('click', canvasClicked);
+        document.querySelector('#cbRectangles').addEventListener('change', (e) => {
+            createRectangles = e.target.checked;
+        });
     }
 
     function drawRandomRect() {
@@ -75,19 +93,22 @@
         const width = getRandomInt(20, 200);
         const height = getRandomInt(20, 200);
 
-        ctx.lineWidth = getRandomInt(1, 10);
-        ctx.strokeStyle = getRandomColor();
-        ctx.fillStyle = getRandomColor();
-
-        ctx.beginPath();
-        ctx.rect(x, y, width, height);
-        ctx.fill();
-        ctx.stroke();
+         drawRectangle(
+                ctx,
+                x,
+                y,
+                width,
+                height,
+                getRandomColor(),
+                getRandomInt(1, 10),
+                getRandomColor()
+            );
     }
 
-    function animate() {
-        if (paused) {
-            requestAnimationFrame(animate);
+    function update() {
+        if (paused) 
+        {
+            requestAnimationFrame(update);
             return;
         }
 
@@ -96,28 +117,35 @@
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         // Draw new random rectangle
-        drawRandomRect();
+        if (createRectangles)
+        {
+            drawRandomRect();
+        }
 
-        requestAnimationFrame(animate);
+        requestAnimationFrame(update);
     }
 
     function drawRectangle(ctx,x,y,width,height,fillStyle="black",lineWidth=0,strokeStyle="black"){
+        ctx.save();
+
+        ctx.fillStyle = fillStyle;
         ctx.lineWidth = lineWidth;
         ctx.strokeStyle = strokeStyle;
-        ctx.fillStyle = fillStyle;
 
         ctx.beginPath();
         ctx.rect(x, y, width, height);
         ctx.fill();
-        
-        if(lineWidth > 0){
+
+        if (lineWidth > 0) {
             ctx.stroke();
         }
+
+        ctx.restore();
     }
 
     // Main execution
     setupUI();
-    animate();
+    update();
 </script>
 
 </body>
