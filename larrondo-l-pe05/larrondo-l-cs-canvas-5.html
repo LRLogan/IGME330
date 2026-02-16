@@ -248,6 +248,20 @@
     // Main execution
     setupUI();
     update();
+
+    // Draw a 600px long, 20px thick line for the new criterion
+    ctx.save();
+
+    ctx.lineWidth = 20;
+    ctx.strokeStyle = "black";
+
+    ctx.beginPath();
+    ctx.moveTo(100, 300);     // starting point
+    ctx.lineTo(700, 300);     // 600px to the right
+    ctx.stroke();
+
+    ctx.restore();
+
 </script>
 
 </body>
