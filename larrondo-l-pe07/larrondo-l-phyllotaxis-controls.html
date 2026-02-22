@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Sine Start</title>
+
+<style>
+	canvas { border: 1px solid black; display:block; margin-bottom:10px; }
+	#controls { margin-top:10px; }
+	label { margin-right:5px; }
+</style>
+
+<script>
+"use strict";
+
+const canvas_width = 400, canvas_height = 300;
+let ctx;
+
+// animation state
+let gen_num = 0;
+let padding = 4;
+
+// adjustable controls
+let divergence = 137.5;
+let fps = 60;
+let fade_enabled = false;
+let circ_radius = 2;
+
+window.onload = init;
+
+function init(){
+
+	const canvas = document.querySelector("#canvas");
+	ctx = canvas.getContext("2d");
+
+	canvas.width = canvas_width;
+	canvas.height = canvas_height;
+
+	// initial clear
+	ctx.fillStyle = "black";
+	ctx.fillRect(0,0,canvas_width,canvas_height);
+
+	setupUI();
+
+	loop();
+}
+
+function setupUI(){
+
+	// divergence dropdown
+	document.querySelector("#ctrl-divergence").onchange = e=>{
+		divergence = Number(e.target.value);
+	};
+
+	// restart button
+	document.querySelector("#btn-restart").onclick = restart;
+
+	// sliders
+	const slider = document.querySelector("#ctrl-fps");
+	const fps_label = document.querySelector("#fps-label");
+
+    const radius_slider = document.querySelector("#ctrl-radius");
+    const radius_label = document.querySelector("#radius-label");
+
+	slider.oninput = e=>{
+		fps = Number(e.target.value);
+		fps_label.innerText = fps;
+	};
+
+    radius_slider.oninput = e=>{
+        circ_radius = Number(e.target.value);
+        radius_label.innerText = circ_radius;
+    };
+
+	// fade checkbox
+	document.querySelector("#ctrl-fade").onchange = e=>{
+		fade_enabled = e.target.checked;
+	};
+}
+
+function restart(){
+
+	gen_num = 0;
+
+	ctx.globalAlpha = 1;
+
+	ctx.fillStyle = "black";
+	ctx.fillRect(0,0,canvas_width,canvas_height);
+}
+
+function loop(){
+
+	setTimeout(loop, 1000 / fps);
+
+	// fade effect
+	if(fade_enabled){
+
+		ctx.globalAlpha = 0.02;
+		ctx.fillStyle = "black";
+		ctx.fillRect(0,0,canvas_width,canvas_height);
+
+		ctx.globalAlpha = 1;
+	}
+
+	let angle = gen_num * dtr(divergence);
+	let rad = padding * Math.sqrt(gen_num);
+
+	let x = rad * Math.cos(angle) + canvas_width/2;
+	let y = rad * Math.sin(angle) + canvas_height/2;
+
+	// clear canvas if offscreen
+	if(x < 0 || x > canvas_width || y < 0 || y > canvas_height){
+
+		restart();
+		return;
+	}
+
+	let color = `hsl(${gen_num/5 % 361},100%,50%)`;
+	drawCircle(ctx,x,y,circ_radius,color);
+
+	gen_num++;
+}
+
+
+// helpers
+function dtr(degrees){
+	return degrees * (Math.PI/180);
+}
+
+function drawCircle(ctx,x,y,radius,color){
+
+	ctx.save();
+
+	ctx.fillStyle = color;
+
+	ctx.beginPath();
+	ctx.arc(x,y,radius,0,Math.PI * 2);
+	ctx.closePath();
+
+	ctx.fill();
+
+	ctx.restore();
+}
+
+</script>
+</head>
+
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div id="controls">
+
+	<div>
+		<label>Divergence Angle</label>
+
+		<select id="ctrl-divergence">
+			<option value="137.1">137.1</option>
+			<option value="137.3">137.3</option>
+			<option value="137.5" selected>137.5 (Golden Angle)</option>
+			<option value="137.7">137.7</option>
+			<option value="137.9">137.9</option>
+			<option value="99.5">99.5</option>
+			<option value="222.5">222.5</option>
+			<option value="45">45</option>
+			<option value="90">90</option>
+		</select>
+
+		<button id="btn-restart">Restart App</button>
+	</div>
+
+	<br>
+
+	<div>
+		<label>
+			Framerate: <span id="fps-label">60</span> FPS
+		</label>
+		<br>
+		<input type="range" id="ctrl-fps" min="10" max="120" value="60">
+        <br>
+        <label>
+			Circle Radius: <span id="radius-label">2</span>
+		</label>
+		<br>
+		<input type="range" id="ctrl-radius" min="1" max="5" value="2">
+
+	</div>
+
+	<br>
+
+	<div>
+		<label>
+			<input type="checkbox" id="ctrl-fade">
+			Enable fading trail effect
+		</label>
+	</div>
+
+</div>
+
+<br>
+
+<div id="about">
+    <h2>About This App</h2>
+    <p>
+        - The divergence angle can be set in the pulldown menu above
+        <br>- The restart button will clear the screen and reset the pattern
+        <br>- The framerate slider will adjust how fast the pattern is drawn. (Default is now 60 FPS)
+        <br>- The circle radius slider will adjust the size of the circles drawn for each point (Default is 2)
+        <br>- The fade checkbox will enable or disable the fading trail effect
+
+        The changes made from the starter code include
+        <br>- Added UI controls for divergence angle, framerate, circle radius, and fade effect
+        <br>- Implemented the phyllotaxis pattern using the formula for angle and radius
+    </p>
+
+</div>
+
+</body>
+</html>
