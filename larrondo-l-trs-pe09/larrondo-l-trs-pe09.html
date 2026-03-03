@@ -18,12 +18,16 @@
 		
         let ctx = document.querySelector('canvas').getContext('2d');
         let rot = 0;
+		let anim_pos_x = 0;
+		let scale_change = 0.01;
 
 		loop();
 	
 		function loop(){
             requestAnimationFrame(loop);
             rot += 0.05;
+			scale_change += 0.001;
+			updateAnimPosX();
 
 			// background
 			ctx.fillStyle = 'yellow'; 
@@ -32,6 +36,10 @@
             drawSquare2(ctx, 200, 100, 100, 100, rot, "purple", 0.75);
             drawSquare2(ctx, 350, 100, 100, 100, -rot, "purple", 1.0);
             drawSquare2(ctx, 500, 300, 100, 100, Math.PI/6.0, "purple", 1.25);
+
+			drawTriangle(ctx, 200, 300, 100, rot, "cyan", "blue", 5, 1.0);
+
+			drawCone(ctx, anim_pos_x, 400, 20, 100, 0, "magenta", "red", 5, 1.0 + scale_change);
 
             // draw a "better" triangle - why is this better? You'll see!
 			ctx.strokeStyle="red";
@@ -95,7 +103,12 @@
 
             ctx.restore();
 		}
-		
+
+		function updateAnimPosX(){
+			anim_pos_x += 2;
+			if(anim_pos_x > 640) anim_pos_x = 0;
+		}
+
 
 		function drawSquare1(ctx,x,y,width,height,fillStyle){
 			ctx.save();
@@ -114,6 +127,51 @@
             ctx.fillRect(0 - width / 2, 0 - height / 2, width, height);
             ctx.restore();
         }
+
+		function drawTriangle(ctx, x, y, size, rot, fill_style, stroke_style, line_width, scale)
+		{
+    		ctx.save();
+    		ctx.translate(x, y);    
+    		ctx.rotate(rot);        
+    		ctx.scale(scale, scale); 
+    
+    		ctx.fillStyle = fill_style;
+    		ctx.strokeStyle = stroke_style;
+    		ctx.lineWidth = line_width;
+
+    		ctx.beginPath();
+    		ctx.moveTo(0, -size / 2);       
+    		ctx.lineTo(size / 2, size / 2);  
+    		ctx.lineTo(-size / 2, size / 2); 
+    		ctx.closePath();
+    		ctx.fill();
+    		ctx.stroke();
+    		ctx.restore();
+		}
+
+		function drawCone(ctx, x, y, radius, length, rot, fill_style, stroke_style, line_width, scale)
+		{
+			ctx.save();
+			ctx.translate(x, y);    
+			ctx.rotate(rot);        
+			ctx.scale(scale, scale); 
+	
+			ctx.fillStyle = fill_style;
+			ctx.strokeStyle = stroke_style;
+			ctx.lineWidth = line_width;
+
+			ctx.beginPath();
+			ctx.moveTo(-length / 2, radius);  
+
+        	ctx.arc(length / 2, radius, 
+                radius , 
+                	Math.PI * 3/ 2, Math.PI / 2,);
+
+        	ctx.closePath();
+			ctx.fill();
+			ctx.stroke();
+			ctx.restore();
+		}
 
 	</script>
 </body>
