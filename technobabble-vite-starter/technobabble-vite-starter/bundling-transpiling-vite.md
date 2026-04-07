@@ -1,4 +1,4 @@
-# Bundling and Transpiling Assignment — Vite + Technobabble
+cd# Bundling and Transpiling Assignment — Vite + Technobabble
 
 **Goal:** Migrate this **Technobabble** starter project into a **Vite** build.
 
